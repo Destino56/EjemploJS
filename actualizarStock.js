@@ -1,12 +1,13 @@
 //Funciones que se ejecutan al cargar la página
-window.onload = function() {
+window.onload = (function(){
     cargaCREFS();
-}
+});
 
 let solicitud_cargaCREFS;
 
 //Esta función se copia y pega, solo se cambia el nombre de las funciones y  del archivo php
 function cargaCREFS(){
+
     solicitud_cargaCREFS=new XMLHttpRequest();
     solicitud_cargaCREFS.onreadystatechange = procesarCREFS; //Función que se encarga de la respuesta que devuelve php
     solicitud_cargaCREFS.open('POST','php_peticiones/cargaCREFS.php', true); //Archivo php que se va a encargar de la petición
@@ -75,7 +76,6 @@ function procesarColores(){
     limpiarSelect();
     if(solicitud_cargaColores.readyState == 4 && solicitud_cargaColores.status==200){
         let data = JSON.parse(solicitud_cargaColores.responseText);
-        console.log(data);
         let select = document.getElementById("id_selectColores");
         let div = document.getElementById("id_fotoColores");
         for (let i=0 ; i<data.length ; i++){
@@ -88,6 +88,9 @@ function procesarColores(){
 
             let divColor = document.createElement("div");
             let img = document.createElement("img");
+            let nombreColor = document.createElement("h4");
+            nombreColor.innerText = data[i].DESCRIPCION;
+            divColor.appendChild(nombreColor);
             img.setAttribute("src", "imgs/muestras/"+data[i].CIMAGEN+".jpg");
             img.setAttribute("height", 30);
             divColor.appendChild(img);
@@ -108,4 +111,34 @@ function limpiarSelect(){
         div.removeChild(div.lastChild);
     }
 
+}
+
+let solicitud_updatePrecio;
+
+function updatePrecio(){
+
+    solicitud_updatePrecio=new XMLHttpRequest();
+    solicitud_updatePrecio.onreadystatechange = procesarRespuesta;
+    solicitud_updatePrecio.open('POST','php_peticiones/actualizarPrecio.php', true);
+    solicitud_updatePrecio.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    solicitud_updatePrecio.send(enviarPrecio()); //Uso la misma función ya que solo quiero mandar el CREF como antes
+}
+
+function enviarPrecio(){
+
+    let value = document.getElementById("inp_CREFS").value;
+    let textobusquedaenviado = "inp_CREFS=" + encodeURIComponent(value)
+    value = document.getElementById('id_precioMayorista').value;
+    textobusquedaenviado + '&mayorista='+encodeURIComponent(value);
+    value = document.getElementById("id_precioPVP").value;
+    textobusquedaenviado + "&pvp=" + encodeURIComponent(value);
+    return textobusquedaenviado;
+    console.log(textobusquedaenviado);
+}
+
+function procesarRespuesta(){
+
+    if(solicitud_updatePrecio.readyState == 4 && solicitud_updatePrecio.status==200) {
+       alert("Precios actualizados correctamente");
+    }
 }

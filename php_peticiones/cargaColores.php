@@ -8,6 +8,7 @@
     include('../includes/conexionmysqli.php'); //Conecta a la base de datos
 
     $cargaColores="SELECT * FROM COLORES WHERE COLOR LIKE '$inp_CREFS%'";
+
     $execute = mysqli_query($DB,$cargaColores);
 
     header('Content-Type: text/txt; charset=utf-8');
