@@ -34,7 +34,7 @@ include('includes/conexionmysqli.php');
         }
     }
     ?>
-</head>
+    	<link rel="stylesheet" href="css/actualizarStock.css">
 
 <body>
     <header>
@@ -78,7 +78,7 @@ include('includes/conexionmysqli.php');
 
             <!--****************************-->
             <form name="formCambiarImagenArticulo" action="php_peticiones/upload-ftp.php" method="POST" enctype="multipart/form-data">
-                <h1>Modificar precio:</h1>
+                <h1>Modificar producto:</h1>
                 <p>CREF del artículo a modificar:
                     <input id="inp_CREFS" list="listaCREF" name="inp_CREFS" placeholder="REFERENCIAS" required onchange="cargaPrecios(); cargaColores() ">
                     <datalist id="listaCREF">
@@ -90,7 +90,12 @@ include('includes/conexionmysqli.php');
                         PVP: <input type="number" id="id_precioPVP" name="updatePVP" step="0.01"/>
                         <input type="button" name="uploadPrice_btn" value="Actualizar" /></p>
                 </div>
-                <img id="id_img_producto" src="">
+
+                <div class="conjunto">
+                    <div class="col-img imagenPrenda"><img id="id_img_producto" src=""></div>
+                    <div class="col-colores fotocolores" id="id_fotoColores" ></div>
+                </div>
+
                 <br>
                 <h4>Cambiar imagen producto:</h4>
                 <div>
@@ -111,8 +116,7 @@ include('includes/conexionmysqli.php');
                     <input name="uploadColor" type="file"/>
                     <input type="submit" name="submitColor" value="Guardar" />
                 </div>
-                <div id="id_fotoColores">
-                </div>
+
             </form>
         </article>
     </section>

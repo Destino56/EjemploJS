@@ -56,8 +56,6 @@ function procesarPrecios(){
         document.getElementById("id_precioPVP").value = data[0].NPCONIVA;
         let imagen = document.getElementById("id_img_producto")
         imagen.setAttribute("src", "imgs/producto/"+data[0].CIMAGEN+".jpg");
-        imagen.setAttribute("width", 200);
-        imagen.setAttribute("height", 300);
     }
 }
 
@@ -87,12 +85,13 @@ function procesarColores(){
             select.appendChild(option);
 
             let divColor = document.createElement("div");
+            divColor.setAttribute("class", "col-divColor")
             let img = document.createElement("img");
-            let nombreColor = document.createElement("h4");
+            let nombreColor = document.createElement("h3");
             nombreColor.innerText = data[i].DESCRIPCION;
             divColor.appendChild(nombreColor);
             img.setAttribute("src", "imgs/muestras/"+data[i].CIMAGEN+".jpg");
-            img.setAttribute("height", 30);
+            img.setAttribute("class", "imgColores");
             divColor.appendChild(img);
             div.appendChild(divColor);
         }
