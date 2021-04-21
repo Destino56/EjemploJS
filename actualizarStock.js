@@ -53,15 +53,20 @@ function enviarCREF(){
 
 function procesarPrecios(){
     limpiarPrecios();
-    let imagen = document.getElementById("id_img_producto")
-        imagen.setAttribute("src", "");
+    let divImagen = document.getElementById("id_col-img");
+
+
     if(solicitud_cargaPrecios.readyState == 4 && solicitud_cargaPrecios.status==200){
         var data = JSON.parse(solicitud_cargaPrecios.responseText);
-        console.log(data);
+        let imagen = document.createElement("img");
+        imagen.setAttribute("id", "id_img_producto");
+        imagen.setAttribute("src", "");
         document.getElementById("id_precioMayorista").value = data[0].NPREMAYOR;
         document.getElementById("id_precioPVP").value = data[0].NPCONIVA;
-        imagen = document.getElementById("id_img_producto")
         imagen.setAttribute("src", "imgs/producto/"+data[0].CIMAGEN+".jpg");
+        imagen.setAttribute("widht", 300);
+        imagen.setAttribute("height", 400);
+        divImagen.appendChild(imagen);
     }
 }
 
@@ -110,6 +115,11 @@ function limpiarPrecios(){
 
     var selectPVP = document.getElementById("id_precioPVP");
     selectPVP.value="";
+
+    if (document.getElementById("id_img_producto")){
+        let imagen = document.getElementById("id_img_producto");
+        imagen.remove();
+    }
 }
 
 //limpia el select de colores  cada vez que se cambie el CREF
