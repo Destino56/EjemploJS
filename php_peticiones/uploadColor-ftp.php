@@ -1,4 +1,5 @@
 <?php
+    //clase para actualizar el color de un articulo
 
     $color = $_POST["id_selectColores"];
 
@@ -17,7 +18,10 @@
         $upload = ftp_put($connection, $destino_nombre, $source_file, FTP_BINARY);
 
         if ($upload){
-            echo "          Imagen subida correctamente";
+            echo "<script>
+                    window.location= '../actualizarStock.php'
+                    alert('Imagen actualizada');
+                </script>";
         }else{
             echo "          No se ha podido subir la imágen";
         }

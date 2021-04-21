@@ -1,13 +1,16 @@
 //Funciones que se ejecutan al cargar la página
 window.onload = (function(){
     cargaCREFS();
+    let btnPrecios = document.getElementById("id_btnActualizarPrecio");
+    btnPrecios.addEventListener("click", ()=>{
+        updatePrecio();
+    });
 });
 
 let solicitud_cargaCREFS;
 
 //Esta función se copia y pega, solo se cambia el nombre de las funciones y  del archivo php
 function cargaCREFS(){
-
     solicitud_cargaCREFS=new XMLHttpRequest();
     solicitud_cargaCREFS.onreadystatechange = procesarCREFS; //Función que se encarga de la respuesta que devuelve php
     solicitud_cargaCREFS.open('POST','php_peticiones/cargaCREFS.php', true); //Archivo php que se va a encargar de la petición
@@ -15,9 +18,8 @@ function cargaCREFS(){
     solicitud_cargaCREFS.send(); //Función que se encarga de mandar la información al php
 }
 
-
+//las funciones procesar sirven para procesar las vueltas de las peticiones a la base de datos
 function procesarCREFS(){
-
     if(solicitud_cargaCREFS.readyState == 4 && solicitud_cargaCREFS.status==200){
         data = JSON.parse(solicitud_cargaCREFS.responseText);
         var select = document.getElementById('listaCREF');
@@ -33,28 +35,32 @@ function procesarCREFS(){
 
 let solicitud_cargaPrecios;
 
-function cargaPrecios(){
 
+function cargaPrecios(){
     solicitud_cargaPrecios=new XMLHttpRequest();
     solicitud_cargaPrecios.onreadystatechange = procesarPrecios;
-    solicitud_cargaPrecios.open('POST','php_peticiones/updatePrice.php', true);
+    solicitud_cargaPrecios.open('POST','php_peticiones/cargaPrecios.php', true);
     solicitud_cargaPrecios.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     solicitud_cargaPrecios.send(enviarCREF());
 }
 
+//las funciones enviar sirven para enviar los datos de javascript a archivos php donde se hacen peticiones a la base de datos
 function enviarCREF(){
-
     let value = document.getElementById('inp_CREFS').value;
     let textobusquedaenviado = 'inp_CREFS='+encodeURIComponent(value);
     return textobusquedaenviado;
 }
 
 function procesarPrecios(){
+    limpiarPrecios();
+    let imagen = document.getElementById("id_img_producto")
+        imagen.setAttribute("src", "");
     if(solicitud_cargaPrecios.readyState == 4 && solicitud_cargaPrecios.status==200){
         var data = JSON.parse(solicitud_cargaPrecios.responseText);
+        console.log(data);
         document.getElementById("id_precioMayorista").value = data[0].NPREMAYOR;
         document.getElementById("id_precioPVP").value = data[0].NPCONIVA;
-        let imagen = document.getElementById("id_img_producto")
+        imagen = document.getElementById("id_img_producto")
         imagen.setAttribute("src", "imgs/producto/"+data[0].CIMAGEN+".jpg");
     }
 }
@@ -62,7 +68,6 @@ function procesarPrecios(){
 let solicitud_cargaColores;
 
 function cargaColores(){
-
     solicitud_cargaColores=new XMLHttpRequest();
     solicitud_cargaColores.onreadystatechange = procesarColores;
     solicitud_cargaColores.open('POST','php_peticiones/cargaColores.php', true);
@@ -98,6 +103,16 @@ function procesarColores(){
     }
 }
 
+//limpia los precios cada vez que se quita el CREF del input
+function limpiarPrecios(){
+    var selectPrecioMayorista = document.getElementById("id_precioMayorista");
+    selectPrecioMayorista.value="";
+
+    var selectPVP = document.getElementById("id_precioPVP");
+    selectPVP.value="";
+}
+
+//limpia el select de colores  cada vez que se cambie el CREF
 function limpiarSelect(){
 
     var select = document.getElementById('id_selectColores');
@@ -109,34 +124,32 @@ function limpiarSelect(){
     while (div.firstChild) {
         div.removeChild(div.lastChild);
     }
-
 }
 
 let solicitud_updatePrecio;
 
 function updatePrecio(){
-
     solicitud_updatePrecio=new XMLHttpRequest();
-    solicitud_updatePrecio.onreadystatechange = procesarRespuesta;
+    solicitud_updatePrecio.onreadystatechange = procesarPrecio;
     solicitud_updatePrecio.open('POST','php_peticiones/actualizarPrecio.php', true);
     solicitud_updatePrecio.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     solicitud_updatePrecio.send(enviarPrecio()); //Uso la misma función ya que solo quiero mandar el CREF como antes
 }
 
 function enviarPrecio(){
-
     let value = document.getElementById("inp_CREFS").value;
     let textobusquedaenviado = "inp_CREFS=" + encodeURIComponent(value)
     value = document.getElementById('id_precioMayorista').value;
-    textobusquedaenviado + '&mayorista='+encodeURIComponent(value);
+    textobusquedaenviado += '&mayorista='+encodeURIComponent(value);
     value = document.getElementById("id_precioPVP").value;
-    textobusquedaenviado + "&pvp=" + encodeURIComponent(value);
-    return textobusquedaenviado;
+    textobusquedaenviado += "&pvp=" + encodeURIComponent(value);
     console.log(textobusquedaenviado);
+    return textobusquedaenviado;
+    
 }
 
-function procesarRespuesta(){
 
+function procesarPrecio(){
     if(solicitud_updatePrecio.readyState == 4 && solicitud_updatePrecio.status==200) {
        alert("Precios actualizados correctamente");
     }

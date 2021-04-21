@@ -1,23 +1,25 @@
 <?php
-    //clase para cargar todos los colores de un CREF
+    //recoge los precios de un articulo y su foto
+
+    //este foreach sirve para recoger todas las variables que se le pasen desde otro archivo javascript
     foreach($_POST as $nombre_campo => $valor){
         $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
         eval($asignacion);
     }
-
     include('../includes/conexionmysqli.php'); //Conecta a la base de datos
 
-    //comprueba que se le pase algun CREF y carga sus colores
     if(!empty($inp_CREFS)){
-        $cargaColores="SELECT * FROM COLORES WHERE COLOR LIKE '$inp_CREFS%'";
-        $execute = mysqli_query($DB,$cargaColores);
-    
-        header('Content-Type: text/txt; charset=utf-8');
+        $cargaPrecios = "SELECT NPCONIVA, NPREMAYOR, CIMAGEN FROM ARTICULOS
+        WHERE CREF = '$inp_CREFS'";
+        $execute = mysqli_query($DB,$cargaPrecios);
+
         while($fila=mysqli_fetch_array($execute)){
-            $data[]=$fila;
+        $data[]=$fila;
         }
         $jsonData=json_encode($data);
         echo $jsonData;
+
+        
     }
     
 

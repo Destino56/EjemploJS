@@ -7,6 +7,7 @@
 
     include('../includes/conexionmysqli.php'); //Conecta a la base de datos
 
+    //cargta todos los CREFS de la base de datos para el combobox
     $cargarCREFS="SELECT CREF FROM ARTICULOS";
     $execute = mysqli_query($DB,$cargarCREFS);
 
