@@ -1,12 +1,18 @@
-*{
-    font-size: 20px;
+
+
+.sectionPrincipal{
+    padding: 5%;
+    font-size: 16px;
     text-align-last: left;
     font-family: sans-serif;
-    padding: 1%;
 }
+
 body{
-    background-color:#5B5B5B;
-    background: url("../imgs/anagrama-bg-2.png") repeat #C7C7C7;
+    
+    
+    color:#555555;
+    /*font-family: 'Lato', sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
 }
 
 h1{
@@ -27,7 +33,7 @@ h1{
 h4{
     padding: 14px;
     text-align: center;
-    color: rgb(124, 28, 28);
+    color: rgb(94, 3, 3);
     font-size: 20px;
     text-transform: uppercase;
     letter-spacing: .2em;
@@ -57,7 +63,7 @@ input,select{
 
     color: #999;
     margin: 3px 0px;
-    border: 1px solid #791212;
+    
     border-radius: 6px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -105,30 +111,28 @@ input[type="file"]{
 img{
     width: 100%;
 }
-
-input[type="submit"],input[type="button"]{
-    /*background-color:#161594;*/
-    background-color: rgb(0, 0, 0);
-    border-radius: 0;
-        border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
+input[type=button], input[type="submit"]{
+    background-color:#161594;
+    
+    text-transform: uppercase;
+    border:1px solid #161594;
     width: 120px;
     height: 40px;
-    font-size: 18px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
+    font-size: 14px;
     text-align: center;
     align-content: center;
+}
+
+
+
+input[type=submit]:hover, input[type="button"]:hover{
+    background-color:#3A39D6;
+    color:rgba(255,255,255,1);
+    
+     box-shadow: 0 5px 10px 0 rgba(0,0,0,.47);
+    -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.47);
+    -ms-box-shadow: 0 5px 10px 0 rgba(0,0,0,.47);
+    -o-box-shadow: 0 5px 10px 0 rgba(0,0,0,.47);
 }
 
 .conjunto{
@@ -170,6 +174,24 @@ input[type="submit"],input[type="button"]{
 }
 
 footer{
-    color: rgb(146, 151, 156);
-
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+    background-color: #b3b3b3;
+    background-repeat: no-repeat;
+    background-position: center;
 }
+
+footer p{
+    color: #fff;
+    color: rgba(255,255,255,.65);
+    font-size: .57em;
+    text-transform: none;
+    letter-spacing: .2em;
+    line-height:2em;
+    text-align: center;
+}
+
+
