@@ -1,9 +1,19 @@
 <?php
+//Revisa que todas las cookies necesarias
+if (!isset($_COOKIE['usuario']) or !isset($_COOKIE['codAg'])) {
+    header('Location: index.php');
+}
+
+if (!isset($_COOKIE['admin'])) {
+    die("Usted no tiene permisos de acceso a esta pagina.");
+}
+
 //Conecta a la base de datos
 include('includes/conexionmysqli.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
+<?php include("includes/divSesion.php") ?>
 
 <head>
     <!--LIBRERIA JQUERY-->
@@ -20,12 +30,14 @@ include('includes/conexionmysqli.php');
     </script>
     <title>Actualizar stock</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/actualizarStock.css">
-    
+
+
     <link rel="shortcut icon" href="imgs/favicon.png" type="image/x-icon" />
     <script src="js/actualizarStock.js"></script>
     <?php
-    
+
     if (isset($_GET["result"])) {
         $resultado = $_GET["result"];
         if ($resultado == 0) {
@@ -37,13 +49,13 @@ include('includes/conexionmysqli.php');
         }
     }
     ?>
-    	
+
 
 <body>
-    <section class="sectionPrincipal"> 
+    <section class="sectionPrincipal">
         <header>
-        <h1>Actualizar stock</h1>
-        </header>     
+            <h1>Actualizar stock</h1>
+        </header>
         <article>
             <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <p>Seleccione una campaña:</p>
@@ -68,8 +80,11 @@ include('includes/conexionmysqli.php');
                 </select>
                 <br>
                 <br>
-                <input type="radio" name="gender" value="total" required>TOTAL (Pone a 0 todas las ref de la campaña y actualiza el fichero csv)<br>
-                <input type="radio" name="gender" value="parcial" required>PARCIAL (Actualiza las ref que coincidan con el fichero csv)<br>
+
+                <input type="radio" name="gender" value="total" required>
+                <label for="">TOTAL (Pone a 0 todas las ref de la campaña y actualiza el fichero csv)</label><br>
+                <input type="radio" name="gender" value="parcial" required>
+                <label for="">PARCIAL (Actualiza las ref que coincidan con el fichero csv)</label><br>
                 <br>
                 <div>
                     <input type="file" name="uploadedFile" required />
@@ -77,38 +92,55 @@ include('includes/conexionmysqli.php');
                 <br>
                 <input type="submit" name="uploadBtn" value="Actualizar" />
             </form>
-            <br><!--*******************************-->
+            <br>
+            <!--*******************************-->
 
             <!--****************************-->
             <form name="formCambiarImagenArticulo" action="php_peticiones/upload-ftp.php" method="POST" enctype="multipart/form-data">
                 <h1>Modificar producto:</h1>
-                <p>CREF del artículo a modificar:
-                    <input id="inp_CREFS" list="listaCREF" name="inp_CREFS" placeholder="REFERENCIAS" required onchange="cargaPrecios(); cargaColores() ">
-                    <datalist id="listaCREF">
-                    </datalist>
 
-                </p>
-                <div>
-                    <p>Precio Mayorista: <input type="number" id="id_precioMayorista" name="updateMayorista" step="0.01"/>
-                        PVP: <input type="number" id="id_precioPVP" name="updatePVP" step="0.01"/>
-                        <input type="button" name="uploadPrice_btn" value="Actualizar" id="id_btnActualizarPrecio"/></p>
+                <div class="flex">
+                    <p>CREF del artículo a modificar:</p>
+                    <input id="inp_CREFS" list="listaCREF" name="inp_CREFS" placeholder="REFERENCIAS" required>
+                    <input type="button" name="btnCref" id="btnCref" value="buscar" onclick="cargaPrecios(); cargaColores()">
+                </div>
+                <datalist id="listaCREF">
+                </datalist>
+                <div class="flex" width=100%>
+
+                    <div class="tabla tablaStock col-8">
+                        <table class="hoverTable" id="tabla"></table>
+                    </div>
+                    <div class="col-4 flex btnStock">
+                        <input type="button" name="btnStock" id="btnStock" value="Actualizar" />
+                    </div>
+                
                 </div>
 
-                <div class="conjunto">
-                    <div class="col-img imagenPrenda"><img id="id_img_producto" src=""></div>
-                    <div class="col-colores fotocolores" id="id_fotoColores" ></div>
+                
+
+                <div>
+                    <p>Precio Mayorista: <input type="number" id="id_precioMayorista" name="updateMayorista" step="0.01" class="precios" />
+                        PVP: <input type="number" id="id_precioPVP" name="updatePVP" step="0.01" class="precios" />
+                        <input type="button" name="uploadPrice_btn" value="Actualizar" id="id_btnActualizarPrecio" />
+                    </p>
+                </div>
+
+                <div class="conjunto" id="conjunto">
+                    <div class="col-img flex" id="divProducto"></div>
+                    <div class="col-colores fotocolores" id="id_fotoColores"></div>
                 </div>
 
                 <br>
                 <h4>Cambiar imagen producto:</h4>
                 <div>
-                    <label for="upload">Selecciona una imagen</label>
-                    <input name="upload" type="file" />
-                    <input type="submit" name="submit" value="Guardar" target="request"/>
+                    <label for="upload">Selecciona una imagen (.jpg)</label>
+                    <input name="upload" type="file" accept="image/jpeg" />
+                    <input type="submit" name="submit" value="ACTUALIZAR" target="request" />
                 </div>
                 <iframe id="request" style="position: absolute; width: 0; height: 0; border: 0;"></iframe>
             </form>
-                <br>
+            <br>
             <form name="formCambiarImagenColores" action="php_peticiones/uploadColor-ftp.php" method="POST" enctype="multipart/form-data">
                 <h4>Cambiar imagen color seleccionado:</h4>
                 <div>
@@ -116,21 +148,26 @@ include('includes/conexionmysqli.php');
                         <option>COLOR</option>
                     </select>
 
-                    <label for="upload">Selecciona una imagen</label>
-                    <input name="uploadColor" type="file"/>
-                    <input type="submit" name="submitColor" value="Guardar" />
+                    <label for="upload">Selecciona una imagen (.jpg)</label>
+                    <input name="uploadColor" type="file" accept="image/jpeg" />
+                    <input type="submit" name="submitColor" value="Actualizar" />
                 </div>
 
             </form>
         </article>
+
+
+
+
     </section>
-    
-    <footer>Creado por GRUPO FTP</footer    >
+
+    <footer>Creado por GRUPO FTP</footer>
     <?php
-        include("includes/divFooter.html");
+    include("includes/divFooter.html");
     ?>
-    
-    
+
+
+
 </body>
 
 

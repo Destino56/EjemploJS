@@ -8,8 +8,10 @@
     include('../includes/conexionmysqli.php'); //Conecta a la base de datos
 
     //comprueba que se le pase algun CREF y carga sus colores
-    if(!empty($inp_CREFS)){
-        $cargaColores="SELECT * FROM COLORES WHERE COLOR LIKE '$inp_CREFS%'";
+   if(!empty($inp_CREFS)){
+        $cargaColores="SELECT COLORES.COLOR, COLORES.CIMAGEN, COLORES.DESCRIPCION, stocks.TALLA, stocks.NSTOCK FROM COLORES 
+        INNER JOIN stocks ON COLORES.COLOR = stocks.COLOR 
+        WHERE stocks.CREF = '$inp_CREFS' ORDER BY stocks.COLOR, stocks.TALLA ";
         $execute = mysqli_query($DB,$cargaColores);
     
         header('Content-Type: text/txt; charset=utf-8');
@@ -21,4 +23,26 @@
     }
     
 
+   /*ORDEN DE LA QUERY:
+        2XL
+        3XL
+        L
+        M
+        S
+        XL
+    */
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
