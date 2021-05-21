@@ -12,13 +12,13 @@
        
         $temp = explode(".", $_FILES['upload']['name']);
         $source_file = $_FILES['upload']['tmp_name'];
-        //$destino_nombre = "web/imgs/producto/" . $cref . ".jpg";
-        $destino_nombre = "web/" . $cref . ".jpg";
+        $destino_nombre = "web/imgs/producto/" . $cref . ".jpg";
+        //$destino_nombre = "web/" . $cref . ".jpg";
      
         //$nombre=$_FILES['upload']['name'];
         $upload = ftp_put($connection, $destino_nombre, $source_file, FTP_BINARY);
 
-         //SCRIPT PARA QUE EL SUBMIT NO VAYA A OTRA PAGINA Y HAGA UN ALERT
+        //SCRIPT PARA QUE EL SUBMIT NO VAYA A OTRA PAGINA Y HAGA UN ALERT
         if ($upload){
             echo "<script>
                 window.location= '../actualizarStock.php'

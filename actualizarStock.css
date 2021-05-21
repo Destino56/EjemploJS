@@ -6,14 +6,14 @@ body{
 
 .sectionPrincipal{
     font-size: 16px;
-    text-align-last: left;
+    padding-top: 1%;
     font-family: sans-serif;
-    padding-left: 3%;
+   
 }
 
 .sectionPrincipal p, label, input[type="radio"]{
     font-size: 18px;
-    text-align-last: left;
+    
     font-family: sans-serif;
     color: black;
 }
@@ -24,7 +24,7 @@ h1{
     
     padding: 14px;
     color: #fff;
-    text-align: center;
+    
     color: rgb(94, 3, 3);
     font-size: 30px;
     text-transform: uppercase;
@@ -36,8 +36,8 @@ h1{
     
 }
 h4{
+    
     padding: 14px;
-    text-align: center;
     color: rgb(94, 3, 3);
     font-size: 20px;
     text-transform: uppercase;
@@ -49,7 +49,7 @@ h4{
 }
 h3{
 
-    text-align: center;
+    
     color: rgb(0, 0, 0);
     font-size: 15px;
     text-transform: uppercase;
@@ -60,7 +60,10 @@ h3{
 
 
 }
-
+.busqueda{
+    margin: 0.5% 2% 0 1%;
+    
+}
 
 input,select{
     width: 20%;
@@ -97,35 +100,23 @@ input[type="radio"]{
 }
 input[type="file"]{
 
-    padding: 0px;
-    border:0;
-    border-radius: 0;
+   
+    
     margin: 0;
-    padding-left: 0;
-    padding-right: 0;
+    display: inline-flex;
+    justify-content: center;
     text-align: center;
-    border: 0px;
+    border: 1px;
     height:25px;
-    width: 500px;
+    width: 26%;
     margin-right: 10px;
     color: black;
+    color: transparent;
+    background-color: #fff;
 
 
 }
 
-input[type=button], input[type="submit"]{
-    display: inline-block;
-    
-    background-color:#161594;
-    text-transform: uppercase;
-    border:1px solid #161594;
-    width: 118px;
-    height: 30px;
-    font-size: 11px;
-    text-align: center;
-    align-content: center;
-
-}
 
 
 
@@ -155,12 +146,17 @@ input[type=submit]:hover, input[type="button"]:hover{
 .flex{
     flex-direction: row;
     display: flex;
-    padding: 0;
+    
     align-content: center;
+    text-align: center;
+    /*justify-content: center;*/
+}
+
+.centrarCref{
+    justify-content: center;
 }
 
 .flex input{
-    margin-left: 25px;
     text-align: center;
 }
 
@@ -183,16 +179,29 @@ tr{
 }
 
 td{
+
     text-align: center;
     justify-content: center;
     display: table-cell;
 }
 
 .col-10{
-    width:66%;
+    width:80%;
 }
 .col-2{
-    width:33%;
+    width:20%;
+}
+
+.col-12{
+    width:100%;
+}
+
+.col-6{
+    width:50%;
+}
+
+.pJpg{
+    margin-top: 5.5%;
 }
 
 .btnStock{
@@ -204,7 +213,260 @@ td{
 }
 
 .tabla.tablaStock{
-    margin: 0;
-    padding: 0;
+    margin-bottom: 2%;
+    width: 100%
 }
 
+
+input[type=button], input[type="submit"]{
+    display: inline-block;
+    
+    background-color:#161594;
+    text-transform: uppercase;
+    border:1px solid #161594;
+    width: 180px;
+    height: 30px;
+    font-size: 11px;
+    text-align: center;
+    align-content: center;
+
+}
+
+table{
+    width: max-content;
+}
+
+.cardP{
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 3%;
+    margin-bottom: 4%;
+    width: 50%;
+    text-align: center;
+    justify-content: center;
+    box-shadow: 0 20px 40px gray;
+
+}
+
+
+.centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.cardPTabla{
+
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 3%;
+    width: 90%;
+    text-align: center;
+    justify-content: center;
+    box-shadow: 0 20px 40px gray;
+
+}
+
+.btnDiv{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    text-align: end;
+}
+
+.btnDiv input[type=button], input[type=submit]{
+    
+    width: fit-content;
+}
+
+.flex .cardP{
+    width: 90%;
+    margin: 2%;
+    margin-top: 4%;
+}
+
+.flex .cardP input[type=file]{
+    width: 40%;
+    margin-left: 2%;
+}
+
+.muestraColor{
+    display: flex;
+    
+}
+
+.muestraColor input, select{
+    margin-top: 4%;
+    
+}
+
+
+.muestraColor input[type=file]{
+    margin-top: 6%;
+    margin-right: 10%;
+    
+}
+
+.muestraColor select{
+    width: 40%;
+    margin-top: 3%;
+    
+}
+
+input[type=file], select{
+    font-size: small;
+}
+
+
+.btnDivImagenes{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.margenesInput{
+    margin: 0;
+    margin-left: 3% !important;
+}
+
+.marginTop{
+    margin-top: 3%;
+}
+
+.interlineado{
+    line-height: 1px;
+    font-size: small !important;
+}
+
+.inputFotos{
+    width: 170px !important;
+}
+
+.flexExport{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+
+}
+
+.flexExport select, input[type=button]{
+    margin: 2%;
+}
+
+.flexExport input[type=button]{
+    margin-left: 4%;
+}
+
+.flexExport select{
+    width: 25%;
+    font-size: 16px;
+}
+
+.menosPaddingtop{
+    margin-top: 2% !important;
+}
+
+.moverArriba{
+    position: absolute;
+    transform: translate(100%, -113%);
+    height: fit-content;
+}
+
+.marginBotPalFooter{
+    margin-bottom: 2%;
+}
+
+
+.list-group{
+    border: solid;
+    border-color: #999;
+    border-width: 1px;
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    display: grid;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-left: 10%;
+    
+}
+
+.datosAgente{
+    justify-content: center;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.btnActAgente{
+    justify-content: center;
+    text-align: center;
+    margin-top: 2%;
+    width: 100%;    
+    padding-left: 5%;
+}
+
+.filasList{
+    padding: 1% 0;
+    width: 100%;
+    border: solid;
+    border-color: #999;
+    border-width: 1px;
+    cursor: pointer;
+}
+.filasList:hover{
+    background-color: whitesmoke;
+}
+.datosAgente{
+    margin-left: 5%;
+}
+.datosAgente label{
+    margin-top: 10px;
+    font-size: medium;
+}
+
+.inGrande{
+    width: 50%;
+}
+
+.inMedio{
+    width: 30%;
+}
+
+.divInsertar{
+    margin-top: 5%;
+    }
+    
+    .cardInsertar{
+    width: 75%;
+    }
+    
+    .inp_insert{
+    width: 30%;
+    margin-right: 10px;
+    }
+    
+    #id_inpInsertarEmail{
+    width: 45%;
+    margin-right: 10px;
+    }
+    
+    #id_inpInsertarAdmin{
+    width: 10%;
+    margin-right: 10px;
+    }
+    #id_inpInsertarCodNac{
+    width: 15%;
+    }
+
+
+.btnBorrar{
+    background-color:  #d12626 !important;
+    border-color: #d12626 !important;
+    
+}
