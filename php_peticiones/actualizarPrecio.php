@@ -10,7 +10,7 @@
     $cargaPrecios = "UPDATE ARTICULOS
                     SET NPVP= $pvp * 0.79, NPREMAYOR = $mayorista , NPCONIVA = $pvp , NPMCONIVA = $mayorista *1.21,
                          NPVP_CANARIAS = $pvp *0.79, NPREMAYOR_CANARIAS = $mayorista , NPCONIVA_CANARIAS = $pvp,
-                         NPMCONIVA_CANARIAS =  $mayorista *1.21
+                         NPMCONIVA_CANARIAS =  $mayorista *1.21, NCODCAT = '$NCODCAT', CCODFAM = '$CCODFAM'
                     WHERE CREF = '$inp_CREFS'";
     $execute = mysqli_query($DB,$cargaPrecios);
 

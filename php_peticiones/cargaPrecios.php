@@ -9,7 +9,7 @@
     include('../includes/conexionmysqli.php'); //Conecta a la base de datos
 
     if(!empty($inp_CREFS)){
-        $cargaPrecios = "SELECT NPCONIVA, NPREMAYOR, CIMAGEN FROM ARTICULOS
+        $cargaPrecios = "SELECT NPCONIVA, NPREMAYOR, CIMAGEN, CCODFAM, NCODCAT FROM ARTICULOS
         WHERE CREF = '$inp_CREFS'";
         $execute = mysqli_query($DB,$cargaPrecios);
 
